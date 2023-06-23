@@ -1,10 +1,9 @@
 <?php
 
-namespace Source\Support;
+namespace Source\Core;
 
 class Request
 {
-
     /**
      * Decode a given string
      */
