@@ -17,11 +17,23 @@ $router = new Router(env('BASE_URL'), '@');
 /**
  * ROUTES
  */
-$router->namespace('Source\Controllers')->group('user');
-$router->get('/', 'UserController@index');
-$router->get('/{id}', 'UserController@getById');
-$router->post('/', 'UserController@create');
-$router->put('/{id}', 'UserController@update');
-$router->delete('/{id}', 'UserController@delete');
+$router->get('/', function () {
+    echo response([
+        'message' => 'Welcome to the API',
+        'version' => '1.0.0'
+    ])->json();
+});
+
+$router->namespace('Source\Controllers');
+$router->get('/user', 'UserController@index');
 
 $router->dispatch();
+
+/*
+ * Redirect all errors
+ */
+if ($router->error()) {
+    echo response([
+        'error' => $router->error()
+    ])->json();
+}

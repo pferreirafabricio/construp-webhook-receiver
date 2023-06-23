@@ -17,7 +17,7 @@ class User extends Model
     /**
      * Bootstrap the User model instance
      */
-    public function bootstrap(string $name): User
+    public function bootstrap(string $name): self
     {
         $this->name = $name;
         return $this;

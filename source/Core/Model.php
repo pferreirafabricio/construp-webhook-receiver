@@ -85,7 +85,7 @@ abstract class Model
      * @param string|null $conditionsParams @example "age=12"
      * @param string $columns @example "id, name"
      */
-    public function find(?string $conditions = null, ?string $conditionsParams = null, string $columns = "*"): Model
+    public function find(?string $conditions = null, ?string $conditionsParams = null, string $columns = "*"): static
     {
         if ($conditions) {
             $this->query = "SELECT {$columns} FROM {$this->entity} WHERE {$conditions}";
@@ -100,7 +100,7 @@ abstract class Model
     /**
      * Set the order by of the query
      */
-    public function order(string $columnName): Model
+    public function order(string $columnName): static
     {
         $this->order = " ORDER BY {$columnName}";
         return $this;
@@ -109,7 +109,7 @@ abstract class Model
     /**
      * Set the offset of the query
      */
-    public function offset(int $offset): Model
+    public function offset(int $offset): static
     {
         $this->offset = " OFFSET {$offset}";
         return $this;
@@ -120,7 +120,7 @@ abstract class Model
      *
      * @param integer $limit
      */
-    public function limit(int $limit): Model
+    public function limit(int $limit): static
     {
         $this->limit = " LIMIT {$limit}";
         return $this;
@@ -132,7 +132,7 @@ abstract class Model
      * @param integer $id
      * @param string $columns
      */
-    public function findById(int $id, string $columns = "*"): mixed
+    public function findById(int $id, string $columns = "*"): static|null
     {
         $find = $this->find('id = :id', "id={$id}", $columns);
         return $find->fetch();
@@ -144,7 +144,7 @@ abstract class Model
      * @param boolean $all
      * @return mixed|null
      */
-    public function fetch(bool $all = false): mixed
+    public function fetch(bool $all = false): static|array|null
     {
         try {
             $stmt = Connect::getInstance()->prepare($this->mountQuery());

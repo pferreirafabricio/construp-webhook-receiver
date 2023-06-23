@@ -13,8 +13,16 @@ class UserController
         $this->user = new User();
     }
 
-    public function index(): string
+    public function index(): void
     {
-        return response($this->user->find()->fetch(true))->json();
+        $users = $this->user->find() ->fetch(true);
+
+        $response = [];
+
+        foreach ($users as $user) {
+            $response[] = $user->data();
+        }
+
+        echo response($response)->json();
     }
 }
