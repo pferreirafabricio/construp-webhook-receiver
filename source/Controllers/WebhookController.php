@@ -75,7 +75,13 @@ class WebhookController
         }
 
         $return = <<<HTML
-            <ul style="font-family: Segoe UI, sans-serif; border: 1px solid #ccc; padding: 10px 40px; border-radius: 8px">
+            <ul style="
+                font-family: Segoe UI, sans-serif;
+                border: 1px solid #ccc;
+                padding: 10px 40px;
+                border-radius: 8px
+                "
+            >
         HTML;
 
         foreach ($webhooks as $webhook) {
@@ -83,7 +89,11 @@ class WebhookController
 
             $return .= <<<HTML
                 <li>
-                    <span>Order Id: <b>$webhook->order_id</b> | Construp User Id: $webhook->construp_user_id | Tag: {$webhook->tag} | Recebido em: [{$formattedDate}]</span>
+                    <span>
+                        Order Id: <b>$webhook->order_id</b>
+                        | Construp User Id: $webhook->construp_user_id
+                        | Tag: {$webhook->tag}
+                        | Recebido em: [{$formattedDate}]</span>
                 </li>
             HTML;
         }
