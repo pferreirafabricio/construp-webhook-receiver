@@ -187,7 +187,7 @@ abstract class Model
             $values = ':' . implode(', :', array_keys($data));
 
             $stmt = Connect::getInstance()->prepare("INSERT INTO {$this->entity} ({$columns}) VALUES ({$values})");
-            $stmt->execute($this->filter($data));
+            $stmt->execute($data);
 
             return (int) Connect::getInstance()->lastInsertId();
         } catch (\PDOException $exception) {

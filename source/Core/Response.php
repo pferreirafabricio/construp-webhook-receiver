@@ -5,7 +5,7 @@ namespace Source\Core;
 class Response
 {
     public function __construct(
-        private array $data,
+        private array|string $data,
         private int $httpResponseCode = 200
     ) {
         $this->data = $data;
@@ -20,5 +20,12 @@ class Response
     {
         http_response_code($this->httpResponseCode);
         return json_encode(["data" => ($this->data ?? '')]);
+    }
+
+    public function html(): string
+    {
+        http_response_code($this->httpResponseCode);
+        header("Content-Type: text/html;" . " charset=" . CONF_API_CHARSET . "");
+        return $this->data;
     }
 }

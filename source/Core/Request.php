@@ -7,7 +7,7 @@ class Request
     /**
      * Decode a given string
      */
-    public static function decode(string $string)
+    public static function decode(string $string): array|string
     {
         if (self::isJson($string)) {
             return json_decode($string, true);

@@ -9,14 +9,8 @@ use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-/**
- * ROUTE CONFIG
- */
 $router = new Router(env('BASE_URL'), '@');
 
-/**
- * ROUTES
- */
 $router->get('/', function () {
     echo response([
         'message' => 'Welcome to the API',
@@ -25,7 +19,8 @@ $router->get('/', function () {
 });
 
 $router->namespace('Source\Controllers');
-$router->get('/user', 'UserController@index');
+$router->get('/list', 'WebhookController@list');
+$router->post('/receive', 'WebhookController@save');
 
 $router->dispatch();
 
